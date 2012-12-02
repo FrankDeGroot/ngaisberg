@@ -1,0 +1,25 @@
+﻿<div class="row">
+    <div class="span8">
+        <h2>Projects</h2>
+        <table>
+            <thead>
+                <tr>
+                    <th>From</th>
+                    <th>To</th>
+                    <th>Where</th>
+                    <th>What</th>
+                    <th><a href="#/project/new"><i class="icon-plus-sign"></i></a></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="project in projects">
+                    <td>{{project.from}}</td>
+                    <td>{{project.to}}</td>
+                    <td>{{project.where}}</td>
+                    <td>{{project.what}}</td>
+                    <td><a href="#/project/edit/{{project._id.$oid}}"><i class="icon-pencil"></i></a></td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

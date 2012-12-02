@@ -1,8 +1,4 @@
-**/.DS_Store
-nbproject
-manifest.mf
-build.xml
-
-.project
-.settings
-.idea/*
+*.suo
+.c9revisions
+node_modules
+npm-debug.log

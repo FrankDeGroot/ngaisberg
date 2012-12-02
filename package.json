@@ -1,0 +1,29 @@
+{
+  "name": "ngaisberg",
+  "version": "0.0.1",
+  "description": "HTML5 SPA Angular Playground",
+  "main": "app.js",
+  "dependencies": {
+    "express": "~3.0.2",
+    "mongodb": "~1.1.11"
+  },
+  "engines": {
+    "node": "0.8.x",
+    "npm": "1.1.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/FrankDeGroot/ngaisberg.git"
+  },
+  "keywords": [
+    "HTML5",
+    "SPA",
+	"Angular"
+  ],
+  "author": "Frank de Groot - Schouten",
+  "license": "BSD",
+  "readmeFilename": "README.md"
+}
