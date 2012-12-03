@@ -1,4 +1,2 @@
-rem @echo off
-pushd ..
-start node scripts\web-server.js
-popd
+@echo off
+start node ..\srv\srv.js

@@ -5,12 +5,12 @@
         });
 
         Project.prototype.update = function (cb) {
-            return Project.update({ id: this._id.$oid },
+            return Project.update({ id: this._id },
                 angular.extend({}, this, { _id: undefined }), cb);
         };
 
         Project.prototype.destroy = function (cb) {
-            return Project.remove({ id: this._id.$oid }, cb);
+            return Project.remove({ id: this._id }, cb);
         };
 
         return Project;
