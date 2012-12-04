@@ -1,3 +1,4 @@
+*.js.map
 *.suo
 .c9revisions
 node_modules
