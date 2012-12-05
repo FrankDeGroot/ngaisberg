@@ -1,4 +1,13 @@
-<form name="projectForm">
+﻿<form name="projectForm">
+    <div class="control-group" ng-class="{error: projectForm.from.$invalid}">
+        <label>From</label>
+        <input type="date" name="from" ng-model="project.from" required>
+        <span ng-show="projectForm.from.$error.required" class="help-inline">Required</span>
+    </div>
+
+    <label>To</label>
+    <input type="date" name="to" ng-model="project.to">
+
     <div class="control-group" ng-class="{error: projectForm.name.$invalid}">
         <label>Where</label>
         <input type="text" name="where" ng-model="project.where" required>
