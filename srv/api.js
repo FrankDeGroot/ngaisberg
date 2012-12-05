@@ -41,6 +41,38 @@ module.exports = function (app, callback) {
                 });
             });
 
+            var update = function (req, res) {
+                var find_map = { _id: ObjectID(req.params.id) },
+                    object_map = req.body;
+
+                db.collection(req.params.object, function (err, collection) {
+                    var sort_order = [],
+                        options_map = { new: true, upsert: false, safe: true };
+
+                    collection.findAndModify(find_map, sort_order, object_map, options_map,
+                        function (err, result) {
+                            res.send(result);
+                        });
+                });
+            };
+
+            app.put('/api/:object/:id', update);
+
+            app.post('/api/:object/:id', update);
+
+            app.delete('api/:object/:id', function ( req, res ) {
+                var object_map = { _id: ObjectID( req.params.id ) };
+
+                db.collection( req.params.object , function ( err, collection ) {
+                    var options_map = { safe: true, single: true };
+      
+                    collection.remove( object_map, options_map, 
+                        function ( err, result ) {
+                            res.send( result );
+                        });
+                });
+            });
+
             callback(app);
         });
     });

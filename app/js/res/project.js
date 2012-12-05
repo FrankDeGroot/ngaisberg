@@ -1,7 +1,6 @@
 angular.module('resProject', ['ngResource']).
     factory('Project', function ($resource) {
         var Project = $resource('api/project/:id', {
-            update: { method: 'PUT' }
         });
 
         Project.prototype.update = function (cb) {
