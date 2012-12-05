@@ -1,11 +1,11 @@
-﻿angular.module('resProject', ['ngResource']).
+angular.module('resProject', ['ngResource']).
     factory('Project', function ($resource) {
         var Project = $resource('api/project/:id', {
             update: { method: 'PUT' }
         });
 
         Project.prototype.update = function (cb) {
-            return Project.update({ id: this._id },
+            return Project.save({ id: this._id },
                 angular.extend({}, this, { _id: undefined }), cb);
         };
 
