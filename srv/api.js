@@ -73,6 +73,8 @@ module.exports = function (app, callback) {
                 });
             });
 
+            //console.log(app.routes);
+
             callback(app);
         });
     });
