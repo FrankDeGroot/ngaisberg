@@ -60,7 +60,7 @@ module.exports = function (app, callback) {
 
             app.post('/api/:object/:id', update);
 
-            app.delete('api/:object/:id', function ( req, res ) {
+            app.delete('/api/:object/:id', function ( req, res ) {
                 var object_map = { _id: ObjectID( req.params.id ) };
 
                 db.collection( req.params.object , function ( err, collection ) {

@@ -1,3 +1,3 @@
-﻿function ProjectListCtrl($scope, Project) {
+function ProjectListCtrl($scope, Project) {
     $scope.projects = Project.query();
 }
