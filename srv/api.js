@@ -62,26 +62,38 @@ module.exports = function (app, callback) {
             });
 
             app.post('/api/:object', function (req, res) {
-                console.log(req.body);
-                db.collection(req.params.object, function (err, collection) {
-                    collection.insert(req.body, { safe: true }, function (err, result) {
-                        res.send(result);
-                    });
+                //console.log(req.body);
+                checkSchema(req.body, schemaMap[req.params.object], function (valid) {
+                    if (valid) {
+                        db.collection(req.params.object, function (err, collection) {
+                            collection.insert(req.body, { safe: true }, function (err, result) {
+                                res.send(result);
+                            });
+                        });
+                    } else {
+                        res.send('Did not pass validation\n');
+                    }
                 });
             });
 
             var update = function (req, res) {
-                var find_map = { _id: ObjectID(req.params.id) },
-                    object_map = req.body;
+                checkSchema(req.body, schemaMap[req.params.object], function (valid) {
+                    if (valid) {
+                        var find_map = { _id: ObjectID(req.params.id) },
+                            object_map = req.body;
 
-                db.collection(req.params.object, function (err, collection) {
-                    var sort_order = [],
-                        options_map = { new: true, upsert: false, safe: true };
+                        db.collection(req.params.object, function (err, collection) {
+                            var sort_order = [],
+                                options_map = { new: true, upsert: false, safe: true };
 
-                    collection.findAndModify(find_map, sort_order, object_map, options_map,
-                        function (err, result) {
-                            res.send(result);
+                            collection.findAndModify(find_map, sort_order, object_map, options_map,
+                                function (err, result) {
+                                    res.send(result);
+                                });
                         });
+                    } else {
+                        res.send('Did not pass validation\n');
+                    }
                 });
             };
 
