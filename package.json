@@ -1,11 +1,12 @@
 {
   "name": "ngaisberg",
   "version": "0.0.1",
-  "description": "HTML5 SPA Angular Bootstrap Playground",
+  "description": "HTML5 SPA Node Angular Bootstrap Playground",
   "main": "app.js",
   "dependencies": {
     "express": "~3.0.2",
-    "mongodb": "~1.1.11"
+    "mongodb": "~1.1.11",
+    "JSV": "~4.0.2"
   },
   "engines": {
     "node": "0.8.x",
@@ -21,8 +22,8 @@
   "keywords": [
     "HTML5",
     "SPA",
-	"Angular",
-	"Bootstrap"
+    "Angular",
+    "Bootstrap"
   ],
   "author": "Frank de Groot - Schouten",
   "license": "BSD",

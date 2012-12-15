@@ -1,6 +1,6 @@
 # Gaisberg
 
-HTML5 SPA [Angular](http://angularjs.org) [Bootstrap](http://github.com/twitter/bootstrap) Playground.
+HTML5 SPA [Node](http://nodejs.org) [Angular](http://angularjs.org) [Bootstrap](http://github.com/twitter/bootstrap) Playground.
 Fork of [Angular Seed Template Project](http://github.com/angular/angular-seed).
 
 ## Special Folders

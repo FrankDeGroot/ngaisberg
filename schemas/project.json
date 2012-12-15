@@ -1,0 +1,21 @@
+{
+  "type" : "object",
+  "properties" : {
+    "_id": {
+      "type": "string"
+    },
+    "from": {
+      "type": "string"
+    },
+    "to": { 
+      "type": "string"
+    },
+    "where": {
+      "type": "string"
+    },
+    "what": { 
+      "type": "string"
+    }
+  },
+  "additionalProperties": false
+}

@@ -3,7 +3,19 @@ module.exports = function (app, callback) {
     c9env(function () {
         var mongodb = require('mongodb'),
             mongoUri = process.env.MONGOLAB_URI || process.env.MONGOHQ_URL || 'mongodb://localhost/test',
-            ObjectID = mongodb.ObjectID;
+            ObjectID = mongodb.ObjectID,
+            fs = require('fs'),
+            validator = require('JSV').JSV.createEnvironment(),
+            schemaMap = {
+                'project': {}
+            };
+
+        function checkSchema(object, schema, callback) {
+            var report = validator.validate(object, schema),
+                valid = (report.errors.length === 0);
+
+            callback(valid);
+        }
 
         mongodb.Db.connect(mongoUri + '?safe=true', function (err, db) {
             if (err) {
@@ -11,6 +23,23 @@ module.exports = function (app, callback) {
                 return;
             }
             console.log('Connected to MongoDB at ' + mongoUri);
+
+            for (schema in schemaMap) {
+                var schemaPath = __dirname + '/../schemas/' + schema + '.json';
+
+                fs.readFile(schemaPath, 'utf8', function (err, data) {
+                    schemaMap[schema] = JSON.parse(data);
+                });
+            }
+
+            app.all('/api/:object/*?', function (req, res, next) {
+                res.contentType('json');
+                if (!!schemaMap[req.params.object]) {
+                    next();
+                } else {
+                    res.send(req.params.object + " is not a valid object type");
+                }
+            });
 
             app.get('/api/:object', function (req, res) {
                 db.collection(req.params.object, function (err, collection) {
