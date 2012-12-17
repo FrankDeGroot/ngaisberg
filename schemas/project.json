@@ -15,6 +15,9 @@
     },
     "what": { 
       "type": "string"
+    },
+    "who": {
+      "type": "string"
     }
   },
   "additionalProperties": false

@@ -16,6 +16,18 @@ module.exports = function (app, callback) {
 
             callback(valid);
         }
+        
+        function readSchema() {
+            var schema;
+            
+            for (schema in schemaMap) {
+                var schemaPath = __dirname + '/../schemas/' + schema + '.json';
+
+                fs.readFile(schemaPath, 'utf8', function (err, data) {
+                    schemaMap[schema] = JSON.parse(data);
+                });
+            }
+        }
 
         mongodb.Db.connect(mongoUri + '?safe=true', function (err, db) {
             if (err) {
@@ -24,20 +36,14 @@ module.exports = function (app, callback) {
             }
             console.log('Connected to MongoDB at ' + mongoUri);
 
-            for (schema in schemaMap) {
-                var schemaPath = __dirname + '/../schemas/' + schema + '.json';
-
-                fs.readFile(schemaPath, 'utf8', function (err, data) {
-                    schemaMap[schema] = JSON.parse(data);
-                });
-            }
+            readSchema();
 
             app.all('/api/:object/*?', function (req, res, next) {
                 res.contentType('json');
                 if (!!schemaMap[req.params.object]) {
                     next();
                 } else {
-                    res.send(req.params.object + " is not a valid object type");
+                    res.send(400, req.params.object + " is not a valid object type.");
                 }
             });
 
@@ -52,10 +58,10 @@ module.exports = function (app, callback) {
             });
 
             app.get('/api/:object/:id', function (req, res) {
-                var object_map = { _id: ObjectID(req.params.id) };
+                var objectMap = { _id: ObjectID(req.params.id) };
 
                 db.collection(req.params.object, function (err, collection) {
-                    collection.findOne(object_map, function (err, result) {
+                    collection.findOne(objectMap, function (err, result) {
                         res.send(result);
                     });
                 });
@@ -66,12 +72,14 @@ module.exports = function (app, callback) {
                 checkSchema(req.body, schemaMap[req.params.object], function (valid) {
                     if (valid) {
                         db.collection(req.params.object, function (err, collection) {
-                            collection.insert(req.body, { safe: true }, function (err, result) {
-                                res.send(result);
+                            var optionsMap = { safe: true };
+                            
+                            collection.insert(req.body, optionsMap, function (err, result) {
+                                res.send(result[0]);
                             });
                         });
                     } else {
-                        res.send('Did not pass validation\n');
+                        res.send(400, 'Did not pass validation\n');
                     }
                 });
             });
@@ -79,14 +87,14 @@ module.exports = function (app, callback) {
             var update = function (req, res) {
                 checkSchema(req.body, schemaMap[req.params.object], function (valid) {
                     if (valid) {
-                        var find_map = { _id: ObjectID(req.params.id) },
-                            object_map = req.body;
+                        var findMap = { _id: ObjectID(req.params.id) },
+                            objectMap = req.body;
 
                         db.collection(req.params.object, function (err, collection) {
-                            var sort_order = [],
-                                options_map = { new: true, upsert: false, safe: true };
+                            var sortOrder = [],
+                                optionsMap = { new: true, upsert: false, safe: true };
 
-                            collection.findAndModify(find_map, sort_order, object_map, options_map,
+                            collection.findAndModify(findMap, sortOrder, objectMap, optionsMap,
                                 function (err, result) {
                                     res.send(result);
                                 });
@@ -101,15 +109,21 @@ module.exports = function (app, callback) {
 
             app.post('/api/:object/:id', update);
 
-            app.delete('/api/:object/:id', function ( req, res ) {
-                var object_map = { _id: ObjectID( req.params.id ) };
+            app.delete('/api/:object/:id', function (req, res) {
+                var objectMap = { _id: ObjectID( req.params.id ) };
 
-                db.collection( req.params.object , function ( err, collection ) {
-                    var options_map = { safe: true, single: true };
+                db.collection(req.params.object, function (err, collection) {
+                    var optionsMap = { safe: true, single: true };
       
-                    collection.remove( object_map, options_map, 
-                        function ( err, result ) {
-                            res.send( result );
+                    collection.remove( objectMap, optionsMap, 
+                        function (err, result) {
+                            if (err) {
+                                res.send(500, err);
+                            } else if (result === 0) {
+                                res.send(404);
+                            } else {
+                                res.send();
+                            }
                         });
                 });
             });
