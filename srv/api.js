@@ -39,8 +39,8 @@ module.exports = function (app, callback) {
             readSchema();
 
             app.all('/api/:object/*?', function (req, res, next) {
-                res.contentType('json');
                 if (!!schemaMap[req.params.object]) {
+                    res.contentType('json');
                     next();
                 } else {
                     res.send(400, req.params.object + " is not a valid object type.");
@@ -100,7 +100,7 @@ module.exports = function (app, callback) {
                                 });
                         });
                     } else {
-                        res.send('Did not pass validation\n');
+                        res.send(400, 'Did not pass validation\n');
                     }
                 });
             };
@@ -115,7 +115,7 @@ module.exports = function (app, callback) {
                 db.collection(req.params.object, function (err, collection) {
                     var optionsMap = { safe: true, single: true };
       
-                    collection.remove( objectMap, optionsMap, 
+                    collection.remove(objectMap, optionsMap, 
                         function (err, result) {
                             if (err) {
                                 res.send(500, err);
