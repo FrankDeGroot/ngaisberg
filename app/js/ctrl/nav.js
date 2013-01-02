@@ -1,4 +1,6 @@
-﻿function NavCtrl($scope, $location) {
+﻿'use strict';
+
+function NavCtrl($scope, $location) {
     $scope.isUrl = function (path, className) {
         if ($location.path() == path) {
             return className;

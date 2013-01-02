@@ -12,6 +12,7 @@ files = [
 
 autoWatch = true;
 
+//browsers = ['PhantomJS'];
 browsers = ['Chrome'];
 
 junitReporter = {

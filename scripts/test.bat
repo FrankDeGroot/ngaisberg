@@ -8,4 +8,6 @@ REM - NodeJS (http://nodejs.org/)
 REM - Testacular (npm install -g testacular)
 
 set BASE_DIR=%~dp0
-testacular start "%BASE_DIR%\..\config\testacular.conf.js" %*
+set PHANTOMJS_BIN=%APPDATA%\npm\node_modules\phantomjs\lib\phantom\phantomjs.exe
+set CHROME_BIN=%ProgramFiles(x86)%\Google\Chrome\Application\chrome.exe
+start testacular start "%BASE_DIR%\..\config\testacular.conf.js" %*
