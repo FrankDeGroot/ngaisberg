@@ -1,4 +1,6 @@
 ﻿function ProjectEditCtrl($scope, $location, $routeParams, Project) {
+    'use strict';
+
     var self = this;
 
     Project.get({ id: $routeParams.projectId }, function (project) {

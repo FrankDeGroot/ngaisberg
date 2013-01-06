@@ -1,19 +1,18 @@
-﻿'use strict';
+﻿function NavCtrl($scope, $location) {
+    'use strict';
 
-function NavCtrl($scope, $location) {
     $scope.isUrl = function (path, className) {
-        if ($location.path() == path) {
+        if ($location.path() === path) {
             return className;
-        } else {
-            return "";
         }
-    }
+        return "";
+    };
 
     $scope.hasUrl = function (path, className) {
-        if ($location.path().substring(0, path.length) == path) {
+        if ($location.path().search(path) === 0) {
             return className;
-        } else {
-            return "";
         }
-    }
+        return "";
+    };
 }
+NavCtrl.$inject = ['$scope', '$location'];

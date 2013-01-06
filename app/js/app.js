@@ -1,7 +1,8 @@
-'use strict';
-
+/*global ProjectCreateCtrl ProjectEditCtrl ProjectListCtrl */
 angular.module('main', ['resProject']).
     config(function ($routeProvider) {
+        'use strict';
+
         $routeProvider.
             when('/', { templateUrl: 'partials/home.html' }).
             when('/about', { templateUrl: 'partials/about.html' }).
