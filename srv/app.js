@@ -1,3 +1,6 @@
+/*jslint node: true */
+'use strict';
+
 var express = require('express'),
     app = express(express.logger()),
     appDir = __dirname + '/../app';

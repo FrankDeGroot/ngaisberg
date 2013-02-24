@@ -1,9 +1,16 @@
-function ProjectCreateCtrl($scope, $location, Project) {
+/*global angular*/
+(function () {
     'use strict';
 
-    $scope.save = function () {
-        Project.save($scope.project, function (project) {
-            $location.path('/project');
-        });
-    };
-}
+    angular.module('project').
+        controller('ProjectCreateCtrl', [
+            '$scope', '$location', 'Project',
+            function ($scope, $location, Project) {
+                $scope.save = function () {
+                    Project.save($scope.project, function (project) {
+                        $location.path('/project');
+                    });
+                };
+            }]);
+}());
+

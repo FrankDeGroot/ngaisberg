@@ -1,3 +1,6 @@
+/*jslint node: true */
+'use strict';
+
 var app = require('./app'),
     api = require('./api'),
     ip = process.env.IP || '127.0.0.1',

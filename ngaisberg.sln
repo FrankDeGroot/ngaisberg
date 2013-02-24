@@ -1,19 +1,19 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2012
-Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "gaisberg", ".", "{F3785565-01EF-49D4-AE30-180418C697CF}"
+Project("{E24C65DC-7377-472B-9ABA-BC803B73C61A}") = "ngaisberg", ".", "{F3785565-01EF-49D4-AE30-180418C697CF}"
 	ProjectSection(WebsiteProperties) = preProject
 		TargetFrameworkMoniker = ".NETFramework,Version%3Dv4.0"
-		Debug.AspNetCompiler.VirtualPath = "/gaisberg"
-		Debug.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\gaisberg\"
-		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\gaisberg\"
+		Debug.AspNetCompiler.VirtualPath = "/ngaisberg"
+		Debug.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\ngaisberg\"
+		Debug.AspNetCompiler.TargetPath = "PrecompiledWeb\ngaisberg\"
 		Debug.AspNetCompiler.Updateable = "true"
 		Debug.AspNetCompiler.ForceOverwrite = "true"
 		Debug.AspNetCompiler.FixedNames = "false"
 		Debug.AspNetCompiler.Debug = "True"
-		Release.AspNetCompiler.VirtualPath = "/gaisberg"
-		Release.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\gaisberg\"
-		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\gaisberg\"
+		Release.AspNetCompiler.VirtualPath = "/ngaisberg"
+		Release.AspNetCompiler.PhysicalPath = "..\..\..\GitHub\ngaisberg\"
+		Release.AspNetCompiler.TargetPath = "PrecompiledWeb\ngaisberg\"
 		Release.AspNetCompiler.Updateable = "true"
 		Release.AspNetCompiler.ForceOverwrite = "true"
 		Release.AspNetCompiler.FixedNames = "false"

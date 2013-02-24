@@ -1,3 +1,6 @@
+/*jslint node: true */
+'use strict';
+
 // Cloud 9 does not support setting your own environment variables
 // so they're added from directory env.
 // filename = variable name, file contents = variable value.

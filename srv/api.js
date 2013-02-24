@@ -1,3 +1,6 @@
+/*jslint node: true */
+'use strict';
+
 module.exports = function (app, callback) {
     var c9env = require('./c9env');
     c9env(function () {

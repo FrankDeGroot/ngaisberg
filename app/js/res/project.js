@@ -1,15 +1,22 @@
-angular.module('resProject', ['ngResource']).
-    factory('Project', function ($resource) {
-        var Project = $resource('api/project/:id', {});
+/*global angular*/
+(function () {
+    'use strict';
 
-        Project.prototype.update = function (cb) {
-            return Project.save({ id: this._id },
-                angular.extend({}, this, { _id: undefined }), cb);
-        };
+    angular.module('project', ['ngResource']).
+        factory('Project', [
+            '$resource',
+            function ($resource) {
+                var Project = $resource('api/project/:id', {});
 
-        Project.prototype.destroy = function (cb) {
-            return Project.remove({ id: this._id }, cb);
-        };
+                Project.prototype.update = function (cb) {
+                    return Project.save({ id: this._id },
+                        angular.extend({}, this, { _id: undefined }), cb);
+                };
 
-        return Project;
-    });
+                Project.prototype.destroy = function (cb) {
+                    return Project.remove({ id: this._id }, cb);
+                };
+
+                return Project;
+            }]);
+}());

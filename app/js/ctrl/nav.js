@@ -1,18 +1,25 @@
-﻿function NavCtrl($scope, $location) {
+﻿/*global angular*/
+(function () {
     'use strict';
 
-    $scope.isUrl = function (path, className) {
-        if ($location.path() === path) {
-            return className;
-        }
-        return "";
-    };
+    angular.
+        module('nav', []).
+        controller('NavController', [
+            '$scope', '$location',
+            function ($scope, $location) {
 
-    $scope.hasUrl = function (path, className) {
-        if ($location.path().search(path) === 0) {
-            return className;
-        }
-        return "";
-    };
-}
-NavCtrl.$inject = ['$scope', '$location'];
+                $scope.isUrl = function (path, className) {
+                    if ($location.path() === path) {
+                        return className;
+                    }
+                    return "";
+                };
+
+                $scope.hasUrl = function (path, className) {
+                    if ($location.path().search(path) === 0) {
+                        return className;
+                    }
+                    return "";
+                };
+            }]);
+}());
